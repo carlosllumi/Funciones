@@ -1,0 +1,77 @@
+#include <stdio.h>
+
+float calcularGastos() {
+    float ServiciosBasicos, Arriendo, Sueldos, GastosLogistica, GastoMercadeo;
+    float TotalGastos;
+
+    printf("----------------GASTOS---------------\n");
+
+    printf("Ingrese Servicios Basicos: ");
+    scanf("%f", &ServiciosBasicos);
+
+    printf("Ingrese Arriendo: ");
+    scanf("%f", &Arriendo);
+
+    printf("Ingrese Sueldos: ");
+    scanf("%f", &Sueldos);
+
+    printf("Ingrese Gastos Logistica: ");
+    scanf("%f", &GastosLogistica);
+
+    printf("Ingrese Gasto Mercadeo: ");
+    scanf("%f", &GastoMercadeo);
+
+    TotalGastos = ServiciosBasicos + Arriendo + Sueldos + GastosLogistica + GastoMercadeo;
+
+    return TotalGastos;
+}
+float calcularIngresos() {
+    float Ventas, Inversiones;
+    float TotalIngresos;
+
+    printf("----------------INGRESOS---------------\n");
+
+    printf("Ingrese Ventas: ");
+    scanf("%f", &Ventas);
+
+    printf("Ingrese Inversiones: ");
+    scanf("%f", &Inversiones);
+
+    TotalIngresos = Ventas + Inversiones;
+
+    return TotalIngresos;
+}
+
+float calcularSaldoContable(float SaldoAnterior, float TotalIngresos, float TotalGastos) {
+    float SaldoContable;
+
+    SaldoContable = SaldoAnterior + TotalIngresos - TotalGastos;
+
+    return SaldoContable;
+}
+
+int main() {
+    int repeticiones;
+
+    printf("Ingrese el numero de repeticiones del proceso: ");
+    scanf("%d", &repeticiones);
+
+    if (repeticiones <= 0) {
+        printf("El numero de repeticiones debe ser un entero positivo.\n");
+        return 1;
+    }
+
+    float SaldoAnterior = 0; 
+
+    for (int i = 1; i <= repeticiones; ++i) {
+        float TotalGastos = calcularGastos();
+        float TotalIngresos = calcularIngresos();
+        float SaldoContable = calcularSaldoContable(SaldoAnterior, TotalIngresos, TotalGastos);
+
+        printf("Saldo Contable: %.2f\n", SaldoContable);
+
+        SaldoAnterior = SaldoContable; 
+    }
+
+    return 0;
+}
